@@ -1,0 +1,14 @@
+/*
+
+### Basic ###
+!/.gitignore
+!/README.md
+
+### Flutter ###
+!/pubspec.yaml
+!/pubspec.lock
+!/.metadata
+!/analysis_options.yaml
+
+### Project ###
+!/lib

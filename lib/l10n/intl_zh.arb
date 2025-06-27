@@ -11,5 +11,7 @@
 
   "footer_user_agreement": "用户协议",
   "footer_privacy_policy": "隐私政策",
-  "footer_contact_us": "联系我们"
+  "footer_contact_us": "联系我们",
+
+  "latest_internal_version": "最新内核版本：{version}"
 }

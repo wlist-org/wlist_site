@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:wlist_site/generated/l10n.dart';
+import 'package:wlist_site/models/platform_info.dart';
 import 'package:wlist_site/theme.dart';
 import 'package:wlist_site/utils/gap.dart';
 
@@ -15,7 +17,7 @@ class BottomFooter extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '当前版本：0.3.0',
+            S.of(context).latest_internal_version(getLatestInternalVersion()),
             style: mergeTextStyleColor(
               Theme.of(context).textTheme.bodySmall,
               CustomColors.lightGray,

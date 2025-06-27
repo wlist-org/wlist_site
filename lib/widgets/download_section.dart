@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wlist_site/assets.dart';
@@ -55,6 +57,10 @@ class _PlatformChooserState extends State<_PlatformChooser> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    final height = min(size.height * 0.1, 120.0);
+    final width = min(size.width * 0.1, 120.0);
+    final square = min(height, width);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: Platform.values.map((platform) {
@@ -70,8 +76,8 @@ class _PlatformChooserState extends State<_PlatformChooser> {
                 child: Column(
                   children: [
                     Container(
-                      width: 80,
-                      height: 80,
+                      width: square,
+                      height: square,
                       decoration: BoxDecoration(
                         color: widget.selectedPlatform == platform
                           ? CustomColors.primaryBlue
@@ -113,6 +119,8 @@ class _PlatformChooserState extends State<_PlatformChooser> {
                       ).copyWith(
                         fontWeight: FontWeight.w600,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                     ),
                   ],

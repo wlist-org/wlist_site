@@ -16,19 +16,13 @@ class AppDescription extends StatelessWidget {
         Flexible(
           flex: 2,
           child: Container(
-            constraints: const BoxConstraints(
-              maxWidth: 200,
-              maxHeight: 200,
+            width: 120,
+            height: 120,
+            decoration: BoxDecoration(
+              color: CustomColors.primaryBlue.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(20),
             ),
-            child: Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                color: CustomColors.primaryBlue.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Logo(),
-            ),
+            child: const Logo(),
           ),
         ),
         

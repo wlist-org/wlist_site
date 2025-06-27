@@ -1,0 +1,11 @@
+{
+    "name": "Wlist",
+    "short_name": "wlist",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#3377EE",
+    "description": "The site of wlist.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false
+}

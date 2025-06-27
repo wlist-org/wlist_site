@@ -21,20 +21,25 @@ class _DownloadSectionState extends State<DownloadSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _PlatformChooser(
-          selectedPlatform: selectedPlatform,
-          onPlatformSelected: (platform) => setState(() => selectedPlatform = platform),
-        ),
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: MediaQuery.sizeOf(context).width * 0.05,
+      ),
+      child: Column(
+        children: [
+          _PlatformChooser(
+            selectedPlatform: selectedPlatform,
+            onPlatformSelected: (platform) => setState(() => selectedPlatform = platform),
+          ),
 
-        const Gap.v(32),
+          const Gap.v(32),
 
-        _PlatformInfoBox(
-          key: ValueKey(selectedPlatform),
-          platform: selectedPlatform,
-        ),
-      ],
+          _PlatformInfoBox(
+            key: ValueKey(selectedPlatform),
+            platform: selectedPlatform,
+          ),
+        ],
+      ),
     );
   }
 }

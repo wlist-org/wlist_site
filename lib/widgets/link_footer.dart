@@ -20,18 +20,15 @@ class LinkFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _buildLink(context, S.of(context).footer_user_agreement, _onUserAgreement),
-          _buildSplit(context),
-          _buildLink(context, S.of(context).footer_privacy_policy, _onPrivacyPolicy),
-          _buildSplit(context),
-          _buildLink(context, S.of(context).footer_contact_us, _onContactUs),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildLink(context, S.of(context).footer_user_agreement, _onUserAgreement),
+        _buildSplit(context),
+        _buildLink(context, S.of(context).footer_privacy_policy, _onPrivacyPolicy),
+        _buildSplit(context),
+        _buildLink(context, S.of(context).footer_contact_us, _onContactUs),
+      ],
     );
   }
 
@@ -60,8 +57,8 @@ class LinkFooter extends StatelessWidget {
           style: mergeTextStyleColor(
             Theme.of(context).textTheme.bodyMedium,
             CustomColors.lightGray,
-          ).copyWith(
-            decoration: TextDecoration.none,
+          // ).copyWith(
+          //   decoration: TextDecoration.none,
           ),
         ),
       ),

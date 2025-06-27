@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:wlist_site/assets.dart';
 import 'package:wlist_site/generated/l10n.dart';
 import 'package:wlist_site/models/platform_info.dart';
@@ -135,44 +136,19 @@ class _PlatformChooserState extends State<_PlatformChooser> {
 }
 
 
-class _PlatformInfoBox extends StatefulWidget {
+class _PlatformInfoBox extends StatelessWidget {
   final Platform platform;
+  final PlatformInfo info;
 
-  const _PlatformInfoBox({
+  _PlatformInfoBox({
     super.key,
     required this.platform,
-  });
-
-  @override
-  State<_PlatformInfoBox> createState() => _PlatformInfoBoxState();
-}
-
-class _PlatformInfoBoxState extends State<_PlatformInfoBox> {
-  late PlatformInfo info;
-
-  @override
-  void initState() {
-    super.initState();
-    info = getPlatformInfo(widget.platform);
-  }
-
-  bool isButtonPressed = false;
-  String buttonText = '正在内测……';
+  }): info = getPlatformInfo(platform);
 
   void _onDownloadTap() {
-    setState(() {
-      buttonText = '敬请期待';
-      isButtonPressed = true;
-    });
-
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        setState(() {
-          isButtonPressed = false;
-          buttonText = '正在内测……';
-        });
-      }
-    });
+    if (info.downloadUrl.isNotEmpty) {
+      launchUrlString(info.downloadUrl);
+    }
   }
 
   @override
@@ -231,9 +207,7 @@ class _PlatformInfoBoxState extends State<_PlatformInfoBox> {
               child: ElevatedButton(
                 onPressed: _onDownloadTap,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isButtonPressed
-                    ? CustomColors.buttonHoverBlue
-                    : CustomColors.buttonBlue,
+                  backgroundColor: CustomColors.buttonBlue,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32,
@@ -246,7 +220,9 @@ class _PlatformInfoBoxState extends State<_PlatformInfoBox> {
                   overlayColor: CustomColors.buttonHoverBlue.withValues(alpha: 0.1),
                 ),
                 child: Text(
-                  buttonText,
+                  info.downloadUrl.isEmpty
+                    ? S.of(context).platform_download_in_beta
+                    : S.of(context).platform_download_now,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

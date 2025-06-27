@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:wlist_site/generated/l10n.dart';
 import 'package:wlist_site/theme.dart';
 
@@ -14,7 +15,7 @@ class LinkFooter extends StatelessWidget {
   }
 
   void _onContactUs() {
-    // TODO
+    launchUrlString("https://github.com/wlist-org/wlist-issue-collector/issues/new");
   }
 
   @override
@@ -24,11 +25,11 @@ class LinkFooter extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildLink(context, S.of(context).footer_user_agreement, () => _onUserAgreement),
+          _buildLink(context, S.of(context).footer_user_agreement, _onUserAgreement),
           _buildSplit(context),
-          _buildLink(context, S.of(context).footer_privacy_policy, () => _onPrivacyPolicy),
+          _buildLink(context, S.of(context).footer_privacy_policy, _onPrivacyPolicy),
           _buildSplit(context),
-          _buildLink(context, S.of(context).footer_contact_us, () => _onContactUs),
+          _buildLink(context, S.of(context).footer_contact_us, _onContactUs),
         ],
       ),
     );

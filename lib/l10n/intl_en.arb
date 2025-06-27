@@ -6,6 +6,8 @@
 
   "platform_download": "Download {name} version",
   "platform_download_version": "Latest version: {version}",
+  "platform_download_in_beta": "In beta test.",
+  "platform_download_now": "Download",
 
   "footer_user_agreement": "User Agreement",
   "footer_privacy_policy": "Privacy Policy",

@@ -50,39 +50,46 @@ Platform getSatisfiedPlatform() {
 class PlatformInfo {
   final String name;
   final String version;
+  final String internalVersion;
   final String downloadUrl;
 
   const PlatformInfo._({
     required this.name,
     required this.version,
+    required this.internalVersion,
     required this.downloadUrl,
   });
 }
 
 PlatformInfo getPlatformInfo(Platform platform) => switch (platform) {
-  Platform.android => PlatformInfo._(
+  Platform.android => const PlatformInfo._(
     name: 'Android',
     version: '1.0.0',
+    internalVersion: '0.4.0',
     downloadUrl: '',
   ),
-  Platform.windows => PlatformInfo._(
+  Platform.windows => const PlatformInfo._(
     name: 'Windows',
     version: '1.0.0',
+    internalVersion: '0.4.0',
     downloadUrl: '',
   ),
-  Platform.macos => PlatformInfo._(
+  Platform.macos => const PlatformInfo._(
     name: 'MacOS',
     version: '1.0.0',
+    internalVersion: '0.4.0',
     downloadUrl: '',
   ),
-  Platform.ios => PlatformInfo._(
-    name: 'iOS',
+  Platform.ios => const PlatformInfo._(
+    name: 'IOS',
     version: '1.0.0',
+    internalVersion: '0.4.0',
     downloadUrl: '',
   ),
-  Platform.linux => PlatformInfo._(
+  Platform.linux => const PlatformInfo._(
     name: 'Linux',
     version: '1.0.0',
+    internalVersion: '0.4.0',
     downloadUrl: '',
   ),
 };

@@ -1,3 +1,13 @@
 {
-  "@@locale": "zh"
+  "@@locale": "zh",
+
+  "title": "智存系统",
+  "description": "一个管理您的多网盘文件的软件",
+
+  "platform_download": "{name}版 下载",
+  "platform_download_version": "最新版本：{version}",
+
+  "footer_user_agreement": "用户协议",
+  "footer_privacy_policy": "隐私政策",
+  "footer_contact_us": "联系我们"
 }

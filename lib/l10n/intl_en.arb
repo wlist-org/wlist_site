@@ -1,3 +1,13 @@
 {
-  "@@locale": "en"
+  "@@locale": "en",
+
+  "title": "Wlist",
+  "description": "A software to manage your files on the clouds.",
+
+  "platform_download": "Download {name} version",
+  "platform_download_version": "Latest version: {version}",
+
+  "footer_user_agreement": "User Agreement",
+  "footer_privacy_policy": "Privacy Policy",
+  "footer_contact_us": "Contact Us"
 }

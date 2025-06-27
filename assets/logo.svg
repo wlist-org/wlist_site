@@ -1,0 +1,12 @@
+<svg width="12" height="12" viewBox="0 0 20.7846 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="scale(1.732,2)">
+        <defs>
+            <path id="c" d="M0,3L6,0V2L2,4V6L6,4V6L0,9Z"/>
+            <path id="z" d="M6,0L12,3V5H8L12,7V9L6,6V4H10L6,2Z"/>
+        </defs>
+        <use href="#c" fill="#0056DD"/>
+        <use href="#z" fill="#00ABFF"/>
+        <use href="#c" fill="#0056DD" transform="translate(6,3)"/>
+        <use href="#z" fill="#00ABFF" transform="translate(-6,3)"/>
+    </g>
+</svg>

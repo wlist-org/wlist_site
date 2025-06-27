@@ -1,0 +1,254 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wlist_site/assets.dart';
+import 'package:wlist_site/generated/l10n.dart';
+import 'package:wlist_site/models/platform_info.dart';
+import 'package:wlist_site/theme.dart';
+import 'package:wlist_site/utils/gap.dart';
+
+class DownloadSection extends StatefulWidget {
+  const DownloadSection({super.key});
+
+  @override
+  State<DownloadSection> createState() => _DownloadSectionState();
+}
+
+class _DownloadSectionState extends State<DownloadSection> {
+  Platform selectedPlatform = getSatisfiedPlatform();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _PlatformChooser(
+          selectedPlatform: selectedPlatform,
+          onPlatformSelected: (platform) => setState(() => selectedPlatform = platform),
+        ),
+
+        const Gap.v(32),
+
+        _PlatformInfoBox(
+          key: ValueKey(selectedPlatform),
+          platform: selectedPlatform,
+        ),
+      ],
+    );
+  }
+}
+
+
+class _PlatformChooser extends StatefulWidget {
+  final Platform selectedPlatform;
+  final Function(Platform) onPlatformSelected;
+
+  const _PlatformChooser({
+    required this.selectedPlatform,
+    required this.onPlatformSelected,
+  });
+
+  @override
+  State<_PlatformChooser> createState() => _PlatformChooserState();
+}
+
+class _PlatformChooserState extends State<_PlatformChooser> {
+  Platform? hoveredPlatform;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: Platform.values.map((platform) {
+        final info = getPlatformInfo(platform);
+        return Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: GestureDetector(
+              onTap: () => widget.onPlatformSelected(platform),
+              child: MouseRegion(
+                onEnter: (_) => setState(() => hoveredPlatform = platform),
+                onExit: (_) => setState(() => hoveredPlatform = null),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: widget.selectedPlatform == platform
+                          ? CustomColors.primaryBlue
+                          : hoveredPlatform == platform
+                            ? CustomColors.hoverBlue
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(12),
+                        border: widget.selectedPlatform != platform && hoveredPlatform != platform
+                          ? Border.all(
+                            color: Colors.grey,
+                            width: 1,
+                          )
+                          : null,
+                      ),
+                      child: FractionallySizedBox(
+                        widthFactor: 0.5,
+                        child: SvgPicture.asset(
+                          platform.logo,
+                          fit: BoxFit.scaleDown,
+                          colorFilter: ColorFilter.mode(
+                            widget.selectedPlatform == platform || hoveredPlatform == platform
+                              ? Colors.white
+                              : CustomColors.textGray,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const Gap.v(12),
+
+                    Text(
+                      info.name,
+                      style: mergeTextStyleColor(
+                        Theme.of(context).textTheme.labelLarge,
+                        widget.selectedPlatform == platform
+                          ? CustomColors.primaryBlue
+                          : CustomColors.darkText,
+                      ).copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      }).toList(growable: false),
+    );
+  }
+}
+
+
+class _PlatformInfoBox extends StatefulWidget {
+  final Platform platform;
+
+  const _PlatformInfoBox({
+    super.key,
+    required this.platform,
+  });
+
+  @override
+  State<_PlatformInfoBox> createState() => _PlatformInfoBoxState();
+}
+
+class _PlatformInfoBoxState extends State<_PlatformInfoBox> {
+  late PlatformInfo info;
+
+  @override
+  void initState() {
+    super.initState();
+    info = getPlatformInfo(widget.platform);
+  }
+
+  bool isButtonPressed = false;
+  String buttonText = '正在内测……';
+
+  void _onDownloadTap() {
+    setState(() {
+      buttonText = '敬请期待';
+      isButtonPressed = true;
+    });
+
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        setState(() {
+          isButtonPressed = false;
+          buttonText = '正在内测……';
+        });
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            spreadRadius: 0,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  S.of(context).platform_download(info.name),
+                  style: mergeTextStyleColor(
+                    Theme.of(context).textTheme.headlineMedium,
+                    CustomColors.darkText,
+                  ).copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                const Gap.v(16),
+
+                Text(
+                  S.of(context).platform_download_version(info.version),
+                  style: mergeTextStyleColor(
+                    Theme.of(context).textTheme.bodyLarge,
+                    CustomColors.textGray,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+
+          const Gap.h(40),
+
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: ElevatedButton(
+                onPressed: _onDownloadTap,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isButtonPressed
+                    ? CustomColors.buttonHoverBlue
+                    : CustomColors.buttonBlue,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  elevation: 2,
+                  overlayColor: CustomColors.buttonHoverBlue.withValues(alpha: 0.1),
+                ),
+                child: Text(
+                  buttonText,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

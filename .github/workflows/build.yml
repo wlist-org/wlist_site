@@ -34,16 +34,10 @@ jobs:
       - name: Build Web App
         run: flutter build web --release
 
-      - name: Install flutter_web_hasher # TODO: install from cargo once possible
-        uses: actions/checkout@v4
-        with:
-          repository: 'xuxiaocheng0201/flutter_web_hasher'
-          ref: 7953dc31cc323d4c4552a2c76aa0194940fbb61d
-          token: '${{ secrets.GH_TOKEN }}'
-          path: ./flutter_web_hasher
-
       - name: Hash web
-        run: cargo run --manifest-path ./flutter_web_hasher/Cargo.toml
+        run: |
+          cargo install flutter_web_hasher
+          flutter_web_hasher --skip index.html --skip 404.html
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

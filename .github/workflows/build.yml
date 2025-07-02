@@ -1,0 +1,52 @@
+name: Build
+
+permissions:
+  contents: read
+
+on: [push]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Check flutter version
+        run: flutter --version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Install intl
+        run: flutter pub global activate intl_utils
+
+      - name: Generate intl codes
+        run: flutter pub global run intl_utils:generate
+
+      - name: Build Web App
+        run: flutter build web --release
+
+      - name: Install flutter_web_hasher # TODO: install from cargo once possible
+        uses: actions/checkout@v4
+        with:
+          repository: 'xuxiaocheng0201/flutter_web_hasher'
+          ref: 7953dc31cc323d4c4552a2c76aa0194940fbb61d
+          token: '${{ secrets.GH_TOKEN }}'
+          path: ./flutter_web_hasher
+
+      - name: Hash web
+        run: cargo run --manifest-path ./flutter_web_hasher/Cargo.toml
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wlist_site
+          path: ./build/web

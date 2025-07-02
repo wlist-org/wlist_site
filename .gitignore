@@ -3,6 +3,7 @@
 ### Basic ###
 !/.gitignore
 !/README.md
+!/.github
 
 ### Flutter ###
 !/pubspec.yaml

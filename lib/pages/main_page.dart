@@ -12,28 +12,30 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Stack(
-        children: [
-          BackgroundWithBubbles(),
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(top: 40.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AppDescription(),
-                  Gap.v(40),
-                  DownloadSection(),
-                  Gap.v(40),
-                  LinkFooter(),
-                  Gap.v(40),
-                  BottomFooter(),
-                ],
+      body: SizedBox.expand(
+        child: Stack(
+          children: [
+            BackgroundWithBubbles(),
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(top: 40.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AppDescription(),
+                    Gap.v(40),
+                    DownloadSection(),
+                    Gap.v(40),
+                    LinkFooter(),
+                    Gap.v(40),
+                    BottomFooter(),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

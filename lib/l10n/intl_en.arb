@@ -1,6 +1,8 @@
 {
   "@@locale": "en",
 
+  "confirm": "Confirm",
+
   "title": "Wlist",
   "description": "A software to manage your files on the clouds.",
 
@@ -12,6 +14,9 @@
   "footer_user_agreement": "User Agreement",
   "footer_privacy_policy": "Privacy Policy",
   "footer_contact_us": "Contact Us",
+
+  "user_agreement_file": "licenses/UserAgreement/zh.md",
+  "privacy_policy_file": "licenses/PrivacyPolicy/zh.md",
 
   "latest_internal_version": "Latest internal version: {version}"
 }

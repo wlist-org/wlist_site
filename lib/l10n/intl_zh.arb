@@ -1,6 +1,8 @@
 {
   "@@locale": "zh",
 
+  "confirm": "确认",
+
   "title": "智存系统",
   "description": "一个管理您的多网盘文件的软件",
 
@@ -12,6 +14,9 @@
   "footer_user_agreement": "用户协议",
   "footer_privacy_policy": "隐私政策",
   "footer_contact_us": "联系我们",
+
+  "user_agreement_file": "licenses/UserAgreement/zh.md",
+  "privacy_policy_file": "licenses/PrivacyPolicy/zh.md",
 
   "latest_internal_version": "最新内核版本：{version}"
 }

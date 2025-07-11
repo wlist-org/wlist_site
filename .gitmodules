@@ -1,0 +1,3 @@
+[submodule "licenses"]
+	path = licenses
+	url = git@github.com:wlist-org/wlist_licenses

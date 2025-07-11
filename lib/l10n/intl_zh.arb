@@ -9,7 +9,7 @@
   "platform_download": "{name}版 下载",
   "platform_download_version": "最新版本：{version}",
   "platform_download_in_beta": "正在内测",
-  "platform_download_now": "立即下载",
+  "platform_download_now": "下载 {suffix}",
 
   "footer_user_agreement": "用户协议",
   "footer_privacy_policy": "隐私政策",

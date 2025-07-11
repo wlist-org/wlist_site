@@ -150,12 +150,6 @@ class _PlatformInfoBox extends StatelessWidget {
     required this.platform,
   }): info = getPlatformInfo(platform);
 
-  void _onDownloadTap() {
-    if (info.downloadUrl.isNotEmpty) {
-      launchUrlString(info.downloadUrl);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -172,71 +166,103 @@ class _PlatformInfoBox extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  S.of(context).platform_download(info.name),
-                  style: mergeTextStyleColor(
-                    Theme.of(context).textTheme.headlineMedium,
-                    CustomColors.darkText,
-                  ).copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-
-                const Gap.v(16),
-
-                Text(
-                  S.of(context).platform_download_version(info.version),
-                  style: mergeTextStyleColor(
-                    Theme.of(context).textTheme.bodyLarge,
-                    CustomColors.textGray,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+      child: MediaQuery.sizeOf(context).aspectRatio > 1
+        ? Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: _buildInfo(context),
             ),
-          ),
-
-          const Gap.h(40),
-
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: ElevatedButton(
-                onPressed: _onDownloadTap,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: CustomColors.buttonBlue,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 16,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  elevation: 2,
-                  overlayColor: CustomColors.buttonHoverBlue.withValues(alpha: 0.1),
-                ),
-                child: Text(
-                  info.downloadUrl.isEmpty
-                    ? S.of(context).platform_download_in_beta
-                    : S.of(context).platform_download_now,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+            const Gap.h(40),
+            Expanded(
+              flex: 1,
+              child: _buildDownload(context),
             ),
+          ],
+        )
+        : Column(
+          children: [
+            _buildInfo(context),
+            const Gap.v(40),
+            _buildDownload(context),
+          ],
+        ),
+    );
+  }
+
+  Widget _buildInfo(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          S.of(context).platform_download(info.name),
+          style: mergeTextStyleColor(
+            Theme.of(context).textTheme.headlineMedium,
+            CustomColors.darkText,
+          ).copyWith(
+            fontWeight: FontWeight.bold,
           ),
+          textAlign: TextAlign.center,
+        ),
+
+        const Gap.v(16),
+
+        Text(
+          S.of(context).platform_download_version(info.version),
+          style: mergeTextStyleColor(
+            Theme.of(context).textTheme.bodyLarge,
+            CustomColors.textGray,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDownload(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: info.downloadUrl.isEmpty
+        ? [
+          _buildButton(context, null, null),
+        ]
+        : [
+          for (final (suffix, url) in info.downloadUrl)
+            _buildButton(context, suffix, url)
         ],
+    );
+  }
+
+  Widget _buildButton(BuildContext context, String? suffix, String? url) {
+    return FractionallySizedBox(
+      widthFactor: 0.6,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: ElevatedButton(
+          onPressed: () { if (url != null) launchUrlString(url); },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: CustomColors.buttonBlue,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 32,
+              vertical: 16,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            elevation: 2,
+            overlayColor: CustomColors.buttonHoverBlue.withValues(alpha: 0.1),
+          ),
+          child: Text(
+            suffix == null
+              ? S.of(context).platform_download_in_beta
+              : S.of(context).platform_download_now(suffix),
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
       ),
     );
   }

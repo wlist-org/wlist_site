@@ -50,7 +50,7 @@ Platform getSatisfiedPlatform() {
 class PlatformInfo {
   final String name;
   final String version;
-  final String downloadUrl;
+  final List<(String, String)> downloadUrl;
 
   const PlatformInfo._({
     required this.name,
@@ -63,27 +63,39 @@ PlatformInfo getPlatformInfo(Platform platform) => switch (platform) {
   Platform.android => const PlatformInfo._(
     name: 'Android',
     version: '1.0.0',
-    downloadUrl: '',
+    downloadUrl: [],
   ),
   Platform.windows => const PlatformInfo._(
     name: 'Windows',
-    version: '1.0.0',
-    downloadUrl: '',
+    version: '1.0.1',
+    downloadUrl: [
+      ('exe', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-windows-x86_64.exe'),
+      ('msix', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-windows-x86_64.msix'),
+      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-windows-x86_64.zip'),
+    ],
   ),
   Platform.macos => const PlatformInfo._(
     name: 'MacOS',
-    version: '1.0.0',
-    downloadUrl: '',
+    version: '1.0.1',
+    downloadUrl: [
+      ('dmg', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-macos.dmg'),
+      ('pkg', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-macos.pkg'),
+      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-macos.zip'),
+    ],
   ),
   Platform.ios => const PlatformInfo._(
     name: 'IOS',
     version: '1.0.0',
-    downloadUrl: '',
+    downloadUrl: [],
   ),
   Platform.linux => const PlatformInfo._(
     name: 'Linux',
-    version: '1.0.0',
-    downloadUrl: '',
+    version: '1.0.1',
+    downloadUrl: [
+      ('deb', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-linux-x86_64.deb'),
+      ('rpm', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-linux-x86_64.rpm'),
+      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-linux-x86_64.zip'),
+    ],
   ),
 };
 

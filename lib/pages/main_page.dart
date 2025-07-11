@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wlist_site/utils/background.dart';
 import 'package:wlist_site/utils/gap.dart';
 import 'package:wlist_site/widgets/app_description.dart';
-import 'package:wlist_site/widgets/bottom_footer.dart';
 import 'package:wlist_site/widgets/download_section.dart';
-import 'package:wlist_site/widgets/link_footer.dart';
+import 'package:wlist_site/widgets/footer.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -27,9 +26,7 @@ class MainPage extends StatelessWidget {
                     Gap.v(40),
                     DownloadSection(),
                     Gap.v(40),
-                    LinkFooter(),
-                    Gap.v(40),
-                    BottomFooter(),
+                    Footer(),
                   ],
                 ),
               ),

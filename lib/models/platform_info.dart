@@ -2,6 +2,7 @@ import 'dart:io' as io;
 import 'dart:ui_web' as web;
 
 import 'package:flutter/foundation.dart';
+import 'package:wlist_site/models/platform_info_detail.dart' deferred as detail;
 
 enum Platform {
   android,
@@ -52,51 +53,21 @@ class PlatformInfo {
   final String version;
   final List<(String, String)> downloadUrl;
 
-  const PlatformInfo._({
+  const PlatformInfo({
     required this.name,
     required this.version,
     required this.downloadUrl,
   });
 }
 
-PlatformInfo getPlatformInfo(Platform platform) => switch (platform) {
-  Platform.android => const PlatformInfo._(
-    name: 'Android',
-    version: '1.0.0',
-    downloadUrl: [],
-  ),
-  Platform.windows => const PlatformInfo._(
-    name: 'Windows',
-    version: '1.0.1',
-    downloadUrl: [
-      ('exe', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-windows-x86_64.exe'),
-      ('msix', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-windows-x86_64.msix'),
-      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-windows-x86_64.zip'),
-    ],
-  ),
-  Platform.macos => const PlatformInfo._(
-    name: 'MacOS',
-    version: '1.0.1',
-    downloadUrl: [
-      ('dmg', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-macos.dmg'),
-      ('pkg', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-macos.pkg'),
-      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-macos.zip'),
-    ],
-  ),
-  Platform.ios => const PlatformInfo._(
-    name: 'IOS',
-    version: '1.0.0',
-    downloadUrl: [],
-  ),
-  Platform.linux => const PlatformInfo._(
-    name: 'Linux',
-    version: '1.0.1',
-    downloadUrl: [
-      ('deb', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-linux-x86_64.deb'),
-      ('rpm', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-linux-x86_64.rpm'),
-      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-linux-x86_64.zip'),
-    ],
-  ),
-};
+Future<void> initializePlatformInfo() async {
+  await detail.loadLibrary();
+}
 
-String getLatestInternalVersion() => "0.4.0";
+PlatformInfo getPlatformInfo(Platform platform) {
+  return detail.getPlatformInfo(platform);
+}
+
+String getLatestInternalVersion() {
+  return detail.getLatestInternalVersion();
+}

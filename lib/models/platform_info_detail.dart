@@ -8,20 +8,20 @@ PlatformInfo getPlatformInfo(Platform platform) => switch (platform) {
   ),
   Platform.windows => const PlatformInfo(
     name: 'Windows',
-    version: '1.0.1',
+    version: '1.0.2',
     downloadUrl: [
-      ('exe', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-windows-x86_64.exe'),
-      ('msix', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-windows-x86_64.msix'),
-      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-windows-x86_64.zip'),
+      ('exe', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.2/wlist_ui-1.0.2-windows-x86_64.exe'),
+      ('msix', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.2/wlist_ui-1.0.2-windows-x86_64.msix'),
+      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.2/wlist_ui-1.0.2-windows-x86_64.zip'),
     ],
   ),
   Platform.macos => const PlatformInfo(
     name: 'MacOS',
-    version: '1.0.1',
+    version: '1.0.2',
     downloadUrl: [
-      ('dmg', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-macos.dmg'),
-      ('pkg', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-macos.pkg'),
-      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-macos.zip'),
+      ('dmg', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.2/wlist_ui-1.0.2-macos.dmg'),
+      ('pkg', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.2/wlist_ui-1.0.2-macos.pkg'),
+      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.2/wlist_ui-1.0.2-macos.zip'),
     ],
   ),
   Platform.ios => const PlatformInfo(
@@ -31,11 +31,11 @@ PlatformInfo getPlatformInfo(Platform platform) => switch (platform) {
   ),
   Platform.linux => const PlatformInfo(
     name: 'Linux',
-    version: '1.0.1',
+    version: '1.0.2',
     downloadUrl: [
-      ('deb', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-linux-x86_64.deb'),
-      ('rpm', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-linux-x86_64.rpm'),
-      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.1/wlist_ui-1.0.1-linux-x86_64.zip'),
+      ('deb', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.2/wlist_ui-1.0.2-linux-x86_64.deb'),
+      ('rpm', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.2/wlist_ui-1.0.2-linux-x86_64.rpm'),
+      ('zip', 'https://github.com/wlist-org/wlist-releases/releases/download/1.0.2/wlist_ui-1.0.2-linux-x86_64.zip'),
     ],
   ),
 };

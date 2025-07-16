@@ -1,0 +1,35 @@
+name: Update version
+
+permissions:
+  contents: write
+
+on:
+  repository_dispatch:
+    types: [update]
+
+jobs:
+  update:
+    name: Update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Update platform_info_detail.dart
+        run: |
+          sed \
+          -e "s/@VERSION@/$VERSION/g" \
+          -e "s/@INTERNAL_VERSION@/$INTERNAL_VERSION/g" \
+          platform_info_detail.dart.template \
+          > platform_info_detail.dart
+        env:
+          VERSION: ${{ github.event.client_payload.version }}
+          INTERNAL_VERSION: ${{ github.event.client_payload.internal_version }}
+
+      - name: Commit and Push
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add .
+          git commit -m "feat(platform): Released v${{ github.event.client_payload.version }}"
+          git push

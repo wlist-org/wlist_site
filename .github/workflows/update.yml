@@ -6,6 +6,7 @@ permissions:
 on:
   repository_dispatch:
     types: [update]
+  workflow_dispatch:
 
 jobs:
   update:
@@ -16,6 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Update platform_info_detail.dart
+        working-directory: ./lib/models
         run: |
           sed \
           -e "s/@VERSION@/$VERSION/g" \

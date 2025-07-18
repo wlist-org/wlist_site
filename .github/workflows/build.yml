@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Web App
         run: |
-          rm -r ./build/web
+          rm -r ./build/web || true
           flutter build web --release
 
       - name: Hash web

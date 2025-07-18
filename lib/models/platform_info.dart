@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io' as io;
 import 'dart:ui_web' as web;
 
 import 'package:flutter/foundation.dart';
-import 'package:wlist_site/models/platform_info_detail.dart' deferred as detail;
+import 'package:http/browser_client.dart';
+import 'package:http/io_client.dart';
 
 enum Platform {
   android,
@@ -60,14 +62,41 @@ class PlatformInfo {
   });
 }
 
+String _latestVersion = "";
+Map<Platform, PlatformInfo> _infos = {};
+
 Future<void> initializePlatformInfo() async {
-  await detail.loadLibrary();
+  assert (kIsWeb);
+  final url = 'latest_info.json?t=${DateTime.now().millisecondsSinceEpoch}';
+  final response = await BrowserClient().get(Uri.parse(url));
+  if (response.statusCode != 200) {
+    throw Exception('Unable to get version info. ${response.statusCode} [${response.reasonPhrase}]');
+  }
+  final json = jsonDecode(response.body);
+  _latestVersion = json['latestInternalVersion'];
+  for (final (key, platform) in [
+    ('android', Platform.android),
+    ('windows', Platform.windows),
+    ('macos', Platform.macos),
+    ('ios', Platform.ios),
+    ('linux', Platform.linux),
+  ]) {
+    final info = json['platforms'][key];
+    _infos[platform] = PlatformInfo(
+      name: info['name'],
+      version: info['version'],
+      downloadUrl: [
+        for (final url in info['downloadUrl'])
+          (url['type'], url['url']),
+      ]
+    );
+  }
 }
 
 PlatformInfo getPlatformInfo(Platform platform) {
-  return detail.getPlatformInfo(platform);
+  return _infos[platform]!;
 }
 
 String getLatestInternalVersion() {
-  return detail.getLatestInternalVersion();
+  return _latestVersion;
 }

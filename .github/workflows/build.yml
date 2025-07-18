@@ -30,19 +30,12 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
             ./dart_tool
             ./build
-          key: build-cache
+          key: wlist-site-flutter-build-cache
 
       - name: Check flutter version
         run: flutter --version
-
-      - name: Install dependencies
-        run: flutter pub get
 
       - name: Install intl
         run: flutter pub global activate intl_utils
@@ -51,12 +44,16 @@ jobs:
         run: flutter pub global run intl_utils:generate
 
       - name: Build Web App
-        run: flutter build web --release
+        run: |
+          rm -r ./build/web
+          flutter build web --release
 
       - name: Hash web
         run: |
           cargo install flutter_web_hasher
-          flutter_web_hasher --skip index.html --skip 404.html
+          flutter_web_hasher \
+          --skip index.html --skip 404.html \
+          --skip latest_info.json --skip latest_info.json.template --skip latest_info.schema.json
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

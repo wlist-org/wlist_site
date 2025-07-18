@@ -1,0 +1,42 @@
+{
+  "latestInternalVersion": "0.4.2",
+  "platforms": {
+    "android": {
+      "name": "Android",
+      "version": "1.0.0",
+      "downloadUrl": []
+    },
+    "windows": {
+      "name": "Windows",
+      "version": "1.0.3",
+      "downloadUrl": [
+        { "type": "exe", "url": "https://github.com/wlist-org/wlist-releases/releases/download/1.0.3/wlist_ui-1.0.3-windows-x86_64.exe" },
+        { "type": "msix", "url": "https://github.com/wlist-org/wlist-releases/releases/download/1.0.3/wlist_ui-1.0.3-windows-x86_64.msix" },
+        { "type": "zip", "url": "https://github.com/wlist-org/wlist-releases/releases/download/1.0.3/wlist_ui-1.0.3-windows-x86_64.zip" }
+      ]
+    },
+    "macos": {
+      "name": "MacOS",
+      "version": "1.0.3",
+      "downloadUrl": [
+        { "type": "dmg", "url": "https://github.com/wlist-org/wlist-releases/releases/download/1.0.3/wlist_ui-1.0.3-macos.dmg" },
+        { "type": "pkg", "url": "https://github.com/wlist-org/wlist-releases/releases/download/1.0.3/wlist_ui-1.0.3-macos.pkg" },
+        { "type": "zip", "url": "https://github.com/wlist-org/wlist-releases/releases/download/1.0.3/wlist_ui-1.0.3-macos.zip" }
+      ]
+    },
+    "ios": {
+      "name": "IOS",
+      "version": "1.0.0",
+      "downloadUrl": []
+    },
+    "linux": {
+      "name": "Linux",
+      "version": "1.0.3",
+      "downloadUrl": [
+        { "type": "deb", "url": "https://github.com/wlist-org/wlist-releases/releases/download/1.0.3/wlist_ui-1.0.3-linux-x86_64.deb" },
+        { "type": "rpm", "url": "https://github.com/wlist-org/wlist-releases/releases/download/1.0.3/wlist_ui-1.0.3-linux-x86_64.rpm" },
+        { "type": "zip", "url": "https://github.com/wlist-org/wlist-releases/releases/download/1.0.3/wlist_ui-1.0.3-linux-x86_64.zip" }
+      ]
+    }
+  }
+}

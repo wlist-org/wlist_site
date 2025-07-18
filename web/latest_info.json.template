@@ -1,0 +1,42 @@
+{
+  "latestInternalVersion": "@INTERNAL_VERSION@",
+  "platforms": {
+    "android": {
+      "name": "Android",
+      "version": "1.0.0",
+      "downloadUrl": []
+    },
+    "windows": {
+      "name": "Windows",
+      "version": "@VERSION@",
+      "downloadUrl": [
+        { "type": "exe", "url": "https://github.com/wlist-org/wlist-releases/releases/download/@VERSION@/wlist_ui-@VERSION@-windows-x86_64.exe" },
+        { "type": "msix", "url": "https://github.com/wlist-org/wlist-releases/releases/download/@VERSION@/wlist_ui-@VERSION@-windows-x86_64.msix" },
+        { "type": "zip", "url": "https://github.com/wlist-org/wlist-releases/releases/download/@VERSION@/wlist_ui-@VERSION@-windows-x86_64.zip" }
+      ]
+    },
+    "macos": {
+      "name": "MacOS",
+      "version": "@VERSION@",
+      "downloadUrl": [
+        { "type": "dmg", "url": "https://github.com/wlist-org/wlist-releases/releases/download/@VERSION@/wlist_ui-@VERSION@-macos.dmg" },
+        { "type": "pkg", "url": "https://github.com/wlist-org/wlist-releases/releases/download/@VERSION@/wlist_ui-@VERSION@-macos.pkg" },
+        { "type": "zip", "url": "https://github.com/wlist-org/wlist-releases/releases/download/@VERSION@/wlist_ui-@VERSION@-macos.zip" }
+      ]
+    },
+    "ios": {
+      "name": "IOS",
+      "version": "1.0.0",
+      "downloadUrl": []
+    },
+    "linux": {
+      "name": "Linux",
+      "version": "@VERSION@",
+      "downloadUrl": [
+        { "type": "deb", "url": "https://github.com/wlist-org/wlist-releases/releases/download/@VERSION@/wlist_ui-@VERSION@-linux-x86_64.deb" },
+        { "type": "rpm", "url": "https://github.com/wlist-org/wlist-releases/releases/download/@VERSION@/wlist_ui-@VERSION@-linux-x86_64.rpm" },
+        { "type": "zip", "url": "https://github.com/wlist-org/wlist-releases/releases/download/@VERSION@/wlist_ui-@VERSION@-linux-x86_64.zip" }
+      ]
+    }
+  }
+}

@@ -5,6 +5,8 @@ permissions:
 
 on:
   push:
+  repository_dispatch:
+    types: [build]
   workflow_dispatch:
 
 jobs:
@@ -23,6 +25,18 @@ jobs:
         with:
           channel: stable
           cache: true
+
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            ./dart_tool
+            ./build
+          key: build-cache
 
       - name: Check flutter version
         run: flutter --version
